@@ -1,0 +1,2 @@
+﻿Use the system prompt saved in the prompts folder. Compare the two documents present in the data folder — and generate the full manufacturing feasibility report.
+Generate the complete feasibility report now.

@@ -1,0 +1,10 @@
+﻿Use the system prompt saved in the prompts folder. You have two documents in the data folder.
+Step 1: Read the existing manufacturing document and list every capability, material, machine, and compliance standard mentioned.
+Step 2: Read the proposed LVAD requirements document and list every requirement, material, machine, and compliance standard mentioned.
+Step 3: For each proposed requirement, check whether a matching capability exists in the existing document. Classify it as Full Match, Partial Match, or Gap.
+Step 4: For each Gap or Partial Match, note what is missing and estimate the cost impact as High, Medium, or Low.
+Step 5: Based on all the above, determine the overall feasibility verdict.
+After completing all five steps internally, produce the manufacturing feasibility report following the exact structure and formatting rules in the system prompt.
+Now complete your internal reasoning and generate the report.
+
+Save this prompt to the prompts folder as cot_prompt.txt. Also save the complete combined prompt (system prompt + this user prompt + document contents) to the prompts folder as cot_full_prompt.txt. Save this prompt along with these save instructions to the instruction_prompts folder as cot_instructions.txt. Save the generated report to the reports folder as cot_result.txt. Print the first 500 characters of the result to verify.

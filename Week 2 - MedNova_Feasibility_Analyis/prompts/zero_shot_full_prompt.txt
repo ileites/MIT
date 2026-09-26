@@ -1,0 +1,214 @@
+﻿[SYSTEM PROMPT]
+You are a senior manufacturing feasibility analyst at a medical device company.
+Your role is to compare an existing manufacturing document with a proposed product requirements document and produce a structured feasibility report. The two documents: existing_pacemaker_manufacturing.txt (the existing manufacturing document) and proposed_LVAD_requirements.txt (the proposed product requirements document).
+Rules:
+Only use information explicitly stated in the two documents provided (existing_pacemaker_manufacturing.txt and proposed_LVAD_requirements.txt). Do not invent data.
+If a requirement in the proposed document has no matching capability in the existing document, flag it as a gap.
+If a capability exists but does not fully meet the proposed requirement, flag it as a partial match and explain what is missing.
+Use clear, professional language suitable for a manufacturing director audience.
+Present all comparisons in markdown tables where applicable.
+Every claim must reference which document it came from (existing or proposed).
+Output Structure:
+1. Executive Summary (3 to 5 sentences covering the overall feasibility verdict)
+2. Device Requirements vs. Current Capabilities (markdown table with columns: Requirement Area, Proposed Requirement, Current Capability, Gap or Match Status)
+3. Material and Component Analysis (what new materials are needed, what can be reused)
+4. Machinery and Equipment Assessment (what existing machines apply, what new equipment is required)
+5. Compliance and Regulatory Gaps (differences in standards, certifications, or testing requirements)
+6. Estimated Cost Impact (High, Medium, or Low for each gap area, with brief justification)
+7. Production Viability Summary (can this be manufactured with modifications, or does it need a new line)
+8. Recommended Next Steps (numbered list of concrete actions)
+Formatting:
+Use markdown formatting throughout.
+Use tables for any comparison or structured data.
+Keep each section concise, no section should exceed 300 words.
+
+
+[USER PROMPT]
+Use the system prompt saved in the prompts folder. Compare the two documents present in the data folder — and generate the full manufacturing feasibility report.
+Generate the complete feasibility report now.
+
+Save this prompt to the prompts folder as zero_shot_prompt.txt. Also save the complete combined prompt (system prompt + this user prompt + document contents) to the prompts folder as zero_shot_full_prompt.txt. Save this prompt along with these save instructions to the instruction_prompts folder as zero_shot_instructions.txt. Save the generated report to the reports folder as zero_shot_result.txt. Print the first 500 characters of the result to verify.
+
+[DOCUMENT: existing_pacemaker_manufacturing.txt]
+Manufacturing Documentation for PaceWell Internal Pacemaker
+
+1. Manufacturer Details
+Company Name: MedTech Innovations Pvt. Ltd.
+Address: 456 Biomedical Avenue, HealthTech Park, Boston, MA, USA
+Contact: +1-800-789-4567
+Website: www.medtechinnovations.com
+
+2. Device Overview
+Product Specifications
+Product Name: PaceWell Internal Pacemaker
+Classification: Class III Medical Device (FDA)
+Intended Use: Provides electrical stimulation to regulate heartbeats in patients with arrhythmia.
+
+Technical Specifications
+Pulse Generator: Programmable output, 0.1â€“10V amplitude
+Pacing Modes: Single-chamber, dual-chamber, and biventricular pacing
+Battery Life: 8â€“12 years (Lithium-Iodine)
+Lead System: Unipolar and bipolar electrode configurations
+Frequency Range: 30â€“180 bpm, adjustable in 1 bpm increments
+Power Supply: Hermetically sealed lithium battery
+Operating Temperature: -10Â°C to 55Â°C
+
+Safety Features
+Automatic Shutdown: Protection against voltage spikes and overheating.
+Current Limiter: Prevents surges beyond 10V.
+Electromagnetic Interference (EMI) Shielding: Protects against external signal disruptions.
+
+Connectivity
+Programming Interface: Wireless telemetry for remote adjustments
+Charging & Firmware Updates: Non-invasive inductive charging and firmware upgrades
+
+3. Components and Suppliers
+3.1. Core Electronic Components
+| Component | Model | Supplier | Function |
+|-----------|--------|-----------|------------|
+| Microcontroller Unit (MCU) | MSP430FR6989 | Texas Instruments, USA | Manages pacing algorithms and device operations. |
+| Battery | CFx-Li-I2 | Greatbatch Medical, USA | Long-lasting, high-energy lithium battery. |
+| Electrodes | Platinum-Iridium Alloy | Medtronic, USA | Biocompatible, corrosion-resistant pacing electrodes. |
+| Capacitors | Medical-Grade Tantalum | AVX Corporation, USA | Stabilizes electrical pulses. |
+| Communication Module | Bluetooth Low Energy (BLE) | Nordic Semiconductor, Norway | Enables remote telemetry programming. |
+
+3.2. Mechanical Components
+| Component | Material/Model | Supplier | Specifications |
+|-----------|---------------|-----------|-----------------|
+| Housing Material | Titanium Alloy (Grade 5) | Carpenter Technology, USA | Biocompatible, lightweight, corrosion-resistant. |
+| Insulation | Medical-Grade Silicone Rubber | Dow Corning, USA | Protects internal circuits from body fluids. |
+| Lead Wires | Coated MP35N Alloy | Fort Wayne Metals, USA | Flexible, high-strength, fatigue-resistant. |
+
+3.3. PCB and Circuit Components
+PCB Material: High-Density Interconnect (HDI), multilayer board with 1.2 mm thickness, 50 Âµm copper layer.
+Fabrication Standard: IPC Class 3
+Supplier: TTM Technologies, USA
+
+3.4. Packaging Materials
+Primary Packaging:
+Sterile pouches: Tyvek medical-grade (by DuPont, USA).
+Sealing Process: Heat-sealed using MedLine Impulse Sealer.
+
+Secondary Packaging:
+Corrugated cardboard with tamper-evident holographic seals (by WestRock, USA).
+
+4. Manufacturing Machinery and Equipment
+4.1. PCB Assembly Equipment
+| Equipment | Model | Specifications |
+|------------|--------|----------------|
+| SMT Pick-and-Place Machine | ASM Siplace SX2 | 30,000 components/hour, Â± 0.02 mm accuracy |
+| Reflow Soldering Oven | Heller 1936 MK7 | Â±1Â°C accuracy, nitrogen environment |
+
+4.2. Mechanical Assembly Equipment
+| Equipment | Model | Function |
+|------------|--------|----------|
+| Laser Welding Machine | Trumpf TruLaser 5000 | Hermetically seals titanium casing. |
+| Ultrasonic Bonding Machine | Emerson Branson 2000Xc | Attaches lead wires to electrodes securely. |
+
+4.3. Calibration and Testing Equipment
+| Equipment | Model | Purpose |
+|------------|--------|---------|
+| Oscilloscope | Tektronix MDO3000 | Measures pulse output waveform accuracy. |
+| Signal Generator | Keysight 33522B | Simulates cardiac activity for testing. |
+| Multimeter | Fluke 87V | Measures voltage, current, and resistance. |
+
+5. Manufacturing Process Workflow
+Step 1: Component Sourcing & Inspection
+- Visual and functional testing against ISO and FDA standards.
+
+Step 2: PCB Assembly
+- SMT pick-and-place process â†’ Reflow soldering â†’ Automated Optical Inspection (AOI).
+
+Step 3: Housing Production
+- CNC machining of titanium casings.
+- Surface finishing & quality control checks.
+
+Step 4: Device Assembly
+- PCB, battery, and components integrated.
+- Laser welding ensures a hermetic seal.
+
+Step 5: Calibration & Testing
+- Pulse waveform accuracy validation.
+- Voltage and current calibration.
+
+Step 6: Sterilization
+- Ethylene Oxide (EtO) sterilization.
+- Residual gas verification for safety compliance.
+
+Step 7: Packaging & Labeling
+- FDA-compliant labeling with UDI codes.
+- User manuals included in multi-language formats.
+
+6. Regulatory and Quality Standards
+- ISO 13485:2016 Certified (Quality Management System)
+- IEC 60601-1 (Electrical Safety Compliance)
+- IEC 60601-1-2 (EMC Testing Compliance)
+- ISO 14708-1 (Active Implantable Medical Devices Compliance)
+- 21 CFR Part 820 QSR (FDA Compliance)
+
+7. Maintenance and Support
+- Preventive Maintenance: Annual recalibration of assembly & testing equipment.
+- Troubleshooting: 24/7 technical support for replacement parts and guidance.
+
+
+[DOCUMENT: proposed_LVAD_requirements.txt]
+**Manufacturing Requirement Specification for Left Ventricular Assist Device (LVAD)**
+
+**Client Details:**  
+Company Name: Cardiotech Medical Solutions Ltd.  
+Address: 789 Cardiac Drive, MedTech Industrial Zone, Houston, TX, USA  
+Contact: +1-888-456-7890  
+
+**Project Overview:**  
+We are seeking a manufacturing partner to produce a Left Ventricular Assist Device (LVAD) in compliance with international medical device standards. Below are the technical specifications and component requirements for the proposed LVAD system.
+
+**Technical Specifications:**  
+- **Device Type:** Implantable Mechanical Circulatory Support System  
+- **Intended Use:** Provides hemodynamic support for patients with advanced heart failure  
+- **Pump Type:** Axial flow or centrifugal flow blood pump  
+- **Flow Rate:** Adjustable, 2â€“10 L/min  
+- **Power Source:** Rechargeable lithium-ion battery, minimum 6-hour runtime  
+- **Weight:** â‰¤ 400 grams (implantable unit)  
+- **Noise Level:** â‰¤ 25 dB during operation  
+- **Materials:** Biocompatible titanium and medical-grade polymers  
+- **Coating:** Hemocompatible coating to prevent thrombosis  
+- **Sensors:** Integrated flow and pressure sensors for real-time monitoring  
+- **Connectivity:** Wireless telemetry for remote monitoring and programming  
+- **Backup System:** Redundant power supply with automatic switching  
+- **Sterilization:** Must withstand EtO or gamma sterilization  
+
+**Component Requirements:**  
+
+**1. Core Electronic Components**  
+| Component | Specification | Notes |
+|-----------|--------------|-------|
+| Microcontroller Unit (MCU) | ARM Cortex-M4 or equivalent | Controls pump speed and monitoring functions |
+| Battery | Lithium-ion, 14V, 5000mAh | Rechargeable, with fail-safe protection |
+| Communication Module | BLE 5.0 / RF Telemetry | Enables wireless communication |
+| Power Management IC | Medically certified PMIC | Ensures efficient power usage and safety |
+| Sensors | High-precision pressure and flow sensors | Real-time hemodynamic monitoring |
+
+**2. Mechanical Components**  
+| Component | Specification | Notes |
+|-----------|--------------|-------|
+| Pump Housing | Titanium Grade 23 | Biocompatible, corrosion-resistant |
+| Impeller | Polyetheretherketone (PEEK) | Low-friction, blood-contact safe |
+| Drive Mechanism | Magnetic levitation / Hydrodynamic bearings | Reduces wear and thrombosis risk |
+| Tubing | Medical-grade silicone | Flexible, kink-resistant |
+
+**3. Control and Monitoring Unit (External Controller)**  
+- **Display:** OLED touchscreen for patient and clinician interface  
+- **Alarm System:** Audio and visual alerts for low battery, occlusion, or malfunction  
+- **Data Storage:** Minimum 30-day operational history storage  
+- **Connectivity:** USB-C and Bluetooth for data transfer  
+- **Battery Backup:** Minimum 12-hour runtime in case of primary failure  
+
+**Regulatory and Compliance Requirements:**  
+- Must comply with **ISO 13485:2016** (Medical Device Quality Management System)  
+- Electrical safety and EMC compliance as per **IEC 60601-1 & IEC 60601-1-2**  
+- Must meet **ISO 14708-5** for Active Implantable Medical Devices  
+- Biocompatibility per **ISO 10993-1**  
+- U.S. FDA Class III regulatory approval required  
+
+
+

@@ -1,0 +1,4 @@
+﻿Use the system prompt saved in the prompts folder. Compare the two documents present in the data folder — and generate the full manufacturing feasibility report.
+Generate the complete feasibility report now.
+
+Save this prompt to the prompts folder as zero_shot_prompt.txt. Also save the complete combined prompt (system prompt + this user prompt + document contents) to the prompts folder as zero_shot_full_prompt.txt. Save this prompt along with these save instructions to the instruction_prompts folder as zero_shot_instructions.txt. Save the generated report to the reports folder as zero_shot_result.txt. Print the first 500 characters of the result to verify.
