@@ -157,3 +157,47 @@ python -m ipykernel install --user --name mit-env --display-name "Python 3.11 (m
 | 2026-10-05 | Se agrega la rúbrica de evaluación (60 pts) y un checklist de entregables derivado. |
 | 2026-10-05 | Se recibe el dataset y se registra un primer vistazo (estructura, nulos, duplicados, anomalías). |
 | 2026-10-06 | Se decide ejecutar localmente en el conda env `mit-env` con Python 3.11, por compatibilidad con `yellowbrick`. Se fijan `scikit-learn==1.5.2` y `matplotlib==3.8.4`, porque las versiones más nuevas rompen yellowbrick 1.5. Las versiones quedan en `requirements.txt`. Ver "Entorno de ejecución" en la sección 4. |
+
+---
+
+## 6. Proyecto UTEC ML – Last Mile Delivery (regresión)
+
+> Esta sección es de **otro proyecto**, no del de Week 4. La guardo acá para no perder el hilo.
+
+**Notebook:** `Project UTEC ML/Grupo_4_Entrega_Final_v1_MachineLearning_ES.ipynb` (versión en español).
+**Target:** `tiempo_entrega_min`. **Modelos:** 1) Linear Regression, 2) Gradient Boosting, 3) Random Forest.
+**Para ejecutar localmente:** el dataset está en `~/Downloads/delivery_sh.csv` (el notebook lo baja de Hugging Face).
+
+### Qué hicimos (2026-10-23 → 2026-10-26)
+
+1. **El Modelo 1 ahora sigue el mismo esquema que los Modelos 2 y 3.**
+   - Mantuvimos la revisión de multicolinealidad (VIF).
+   - **Modelo base y validación cruzada:** se crea el modelo con `kf`, se hace la validación cruzada sobre la misma muestra de 15.000 pedidos, se entrena con el train completo y se evalúa en test (R², MAE y RMSE).
+   - Dejamos un solo gráfico: residuos vs. predicción.
+   - **Ajuste de hiperparámetros:** queda una nota que explica que no aplica, porque la regresión lineal no tiene hiperparámetros.
+   - Sacamos el EDA repetido (que además incluía `aoi_id`), la "recta de regresión" que engañaba, el segundo entrenamiento y las celdas sueltas de métricas.
+   - El modelo se llama `modelo_lr_reg` (también en la tabla de comparación).
+   - Resultados: validación cruzada R² 0,278 / MAE 41,3 · test R² 0,287 / MAE 41,4 / RMSE 65,1 · train R² 0,28 → no hay overfitting, el modelo es demasiado simple para los datos (underfitting).
+2. **Imports:** todos quedaron en la celda de importación de librerías. Borramos los que estaban en el medio, que ya estaban arriba. `make_regression` no se usaba.
+3. **Métrica de la búsqueda de hiperparámetros:** las dos búsquedas (GB y RF) usan `scoring="neg_mean_absolute_error"`. Antes GB usaba R² y RF usaba MAE.
+   - GB ajustado ahora usa `**search.best_params_` en vez de hiperparámetros escritos a mano.
+   - Resultado nuevo de GB: `n_estimators=500`, `max_features='log2'`, `max_depth=4`, `learning_rate=0.1` → test MAE 38,1 / R² 0,437 (base: 38,8 / 0,415). Actualizamos las observaciones.
+   - Los resultados de RF no cambian (su búsqueda ya usaba MAE): base R² 0,53 / MAE 34,6; ajustado R² 0,47 / MAE 37,3.
+4. **Gráficos de base vs. ajustado (R² y MAE)** en el ajuste de hiperparámetros de GB y RF, con el mismo formato que la comparación final. Reemplazan el gráfico viejo de GB, que tenía `ylim(0.20, 0.3)` y dejaba las barras afuera.
+
+### Cómo leer las métricas
+
+- **MAE (cuanto menor, mejor):** promedio de los minutos que la predicción se aleja del valor real, sin importar si se pasa o se queda corta. Mínimo 0.
+- **R² (cuanto mayor, mejor):** qué parte de la variación del tiempo de entrega explica el modelo, comparado con predecir siempre el promedio. 0 = igual que el promedio; 1 = perfecto; negativo = peor que el promedio. Es más sensible a los errores grandes (las entregas largas).
+
+### Pendiente
+
+- [ ] **Volver a correr el notebook completo**: las celdas nuevas no tienen outputs guardados, y la tabla y los gráficos de la comparación final todavía muestran el GB ajustado viejo.
+- [ ] Celda 115: tiene el resultado viejo de la búsqueda de GB pegado como comentario (`n_estimators=200`, R² 0,2718). Borrarla o actualizarla.
+- [ ] Revisar las demás inconsistencias de GB y RF:
+  - La celda 117 imprime "MAE cross-v" para el MAE del modelo ajustado.
+  - Comentario de GB: "50.000 filas" (en realidad son 15.000).
+  - La búsqueda de RF parte de un modelo sin `min_samples_leaf=10` ni `max_samples=0.3`, a diferencia del modelo base.
+  - La observación de RF cita un "R² en train 0,59" que no se calcula en ninguna celda.
+  - Typos "Ramdom Forest".
+- [ ] Después de volver a correr, confirmar que las observaciones de la comparación final siguen siendo válidas (el mejor modelo sigue siendo el RF base).

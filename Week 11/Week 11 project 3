@@ -1,0 +1,113 @@
+Description
+Business Context
+GlobalEdge Brokerage is a mid-sized retail and institutional brokerage firm operating across 12 countries, serving approximately 180,000 active clients through a network of 400 equity brokers. The firm generates revenue primarily through brokerage commissions and advisory fees on equity, forex, commodity, and crypto trades executed on behalf of clients across NYSE, NASDAQ, LSE, TSE, and ASX markets. Each broker manages an average book of 450 clients, ranging from individual retail investors to small institutional accounts, and handles between 30 and 50 inbound and outbound client interactions per day - covering recommendations, trade confirmations, and portfolio reviews.
+
+The core of a broker's morning workflow is market preparation. Between 7:00 AM and 9:15 AM, brokers are expected to review overnight developments, assess sector movements, and form a view on the stocks most relevant to their client book before the first client call. During this window, 60–80 financial news articles and multiple SEC regulatory filings are typically published. A broker reading at normal pace can meaningfully absorb 15–20 articles in this window - covering roughly 20–30% of available content - before client calls begin. The rest goes unread.
+
+The consequence is a structural intelligence gap at the moment of client contact. Brokers give recommendations grounded in general market knowledge and memory rather than the morning's actual signals. Risk disclosures buried in multi-hundred-page regulatory filings - particularly annual reports - are rarely reviewed before client conversations; compliance checks happen after the fact, not before. When clients challenge a recommendation or ask for sources, brokers frequently cannot respond with specificity, creating both trust erosion and documented compliance exposure. There is no firm-wide standard for how news or filings are reviewed before client calls; brokers rely on personal bookmarks and individually chosen news sites, with no consistency in coverage or depth.
+
+A broker covering 450 clients has no systematic way to know which of their holdings are affected by overnight regulatory filings before their first call.
+70–80% of the morning's published market content goes unread by any individual broker, meaning recommendations are regularly made without access to today's signals.
+When clients challenge a recommendation, brokers cannot cite sources - exposing the firm to both trust and compliance risk.
+Compliance review happens after client interactions, not before, meaning regulatory gaps are caught too late to prevent them.
+Senior brokers, already resistant to new tooling, have no incentive to adopt systems that add friction rather than reduce it.
+Objective
+This initiative proposes a proof-of-concept for a natural language market intelligence system that enables GlobalEdge brokers to query today's news and regulatory filings in plain English before and during or before client calls - without any technical training or workflow disruption.
+
+The system ingests financial news articles and recent regulatory filings, and makes them queryable through plain-language questions - enabling a broker to ask "which S&P 500 stocks have risk disclosures filed this week?" and receive a sourced, grounded answer
+Every response surfaces the underlying source - article title, filing reference, publication date - so brokers can cite evidence to clients with confidence, reducing both compliance exposure and trust erosion.
+A successful proof-of-concept will demonstrate that brokers can meaningfully expand their pre-call market coverage within their first week of use - the adoption threshold that prior tooling attempts consistently failed to cross.
+
+Data Dictionary
+
+File 1: global_news.csv
+Data: News articles about global financial markets.
+Description: News articles collected from 114 sources, covering topics like stock markets, the Federal Reserve, oil prices, and cryptocurrency.
+Column	Type	Description
+title	Text	Headline of the article
+description	Text	Short summary of the article
+content	Text	Body text of the article (truncated)
+source	Text	Name of the news outlet
+url	Text	Link to the original article
+published_at	Datetime	Publication date and time (UTC)
+query	Text	Search keyword used to find the article
+File 2: stock_price_details.csv
+Data: Daily stock, ETF, FX, commodity, and crypto prices.
+Description: Price records for 23 stocks (e.g., AAPL, TSLA, BTC-USD, EURUSD=X, Gold). Each row is stored as a single text sentence containing all fields.
+File 3: sec_filings_10q.pdf
+Description: A 126-page regulatory filing for the quarter ended March 31, 2026. Contains financial statements, management discussion, risk factors, and legal disclosures for Alphabet (parent of Google), Apple, Tesla etc.
+General Submission Guidelines
+Submissions found copied or plagiarized from other learners will be marked zero.
+Post-deadline submissions will not be accepted for evaluation.
+For common project-related queries, refer to the FAQ page(s).
+If more than one file is submitted, the submission will not be evaluated.
+Only the required submission format for your chosen track will be evaluated.
+Path-wise Submission Guidelines
+Below is a concise breakdown of the solution approach, submission format, and best practices for the project.
+
+Full-Code Path
+Solution Approach
+You'll receive a notebook template with section headers aligned to the rubric.
+Write all code from scratch under each section.
+Plan your approach before coding, use markdown cells to narrate your reasoning, and add inline comments for non-obvious logic.
+Run all cells top-to-bottom with a clean kernel - every expected output must be visible, with no errors.
+Address all rubric sections meaningfully.
+
+Submission Format
+Export the notebook to HTML and verify it renders correctly in a browser before submitting.
+Only the .html file is accepted - .ipynb files will not be evaluated.
+
+Best Practices
+Do:
+Follow consistent naming conventions.
+Display outputs (plots, tables) explicitly rather than just computing them.
+Narrate your logic through markdown cells between code blocks.
+Don't:
+Submit the .ipynb file.
+Leave cells unexecuted or with errors.
+Write code without comments.
+Skip sections.
+Low-Code Path
+Solution Approach
+You’ll receive a pre-filled notebook with partial code. Certain cells contain blanks and commented code snippets for specific tasks.
+Fill in the blanks, uncomment the relevant code snippets, run the notebook end to end, and capture key outputs (tables, traces, metrics) as cropped, labeled screenshots.
+Then transfer your findings, insights, and recommendations into a business presentation (a sample presentation template is provided).
+Address all rubric sections meaningfully.
+Submission Format
+Submit the completed presentation as a .pdf file (not .pptx). 
+The notebook itself is not to be submitted.
+Best Practices
+Do:
+Cover a business overview of the problem and solution approach, key findings and insights that can drive decisions, and clear business recommendations.
+Articulate insights in your own words.
+Explain what each output shows and why it matters, and back recommendations with data.
+Include the potential benefits of implementing the solution; it will give your submission an edge.
+Don't: 
+Paste raw code or tracebacks into slides
+Submit the notebook, or copy outputs without explaining their significance.
+Power Ahead!
+Rubric
+Criteria
+Data Preparation for RAG: load all the provided datasets; choose the text splitting mechanism and parameters and justify the choice; choose the embedding model and justify the choice; set up a vector database/vector store; provide observations/comments on the preparation step.
+Points
+10
+Criteria
+Question Answering with RAG: configure an LLM and justify the chosen parameters; define a system prompt for question answering; define the retriever; answer all the test cases; provide comments/observations for all the answers received.
+Points
+10
+Criteria
+Evaluating RAG: choose the LLM for evaluation and justify the choice; define evaluation parameters; evaluate responses across all 5 test cases provided; provide comments/observations for the evaluation output.
+Points
+8
+Criteria
+Question Answering with Tuned RAG: choose three configurations using combinations of LLM and retrieval parameters (chunk size, chunk overlap, number of chunks to retrieve, LLM temperature, LLM top p, LLM max tokens) and justify the choices; answer all the test cases with each chosen configuration; evaluate all the responses above; provide comments/observations for the evaluation output.
+Points
+20
+Criteria
+Actionable Insights and Recommendations: provide key takeaways for the business.
+Points
+4
+Criteria
+Presentation/Notebook - Overall quality: ensure structure and flow, crispness, and visual appeal, and include a conclusion and business recommendations; for notebook-based submissions, ensure structure and flow, well-commented code, and a conclusion and business recommendations.
+Points
+8
